@@ -186,8 +186,8 @@ def gera_problema_tsp(df_cidades):
 
 # HILL-CLIMBING COM RESTART
 def hill_climbing_restart(tsp):
-
-    for _ in range(50):
+    # Parâmetro: 20 restarts
+    for _ in range(20):
 
         # solucao inicial
         solucao_inicial = solucao_aleatoria(tsp)

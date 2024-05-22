@@ -155,8 +155,7 @@ def gera_individuo(n_cols):
     VT = np.random.randint(low=1, high=n_cols+1, size=n_cols)
     return VT
 
-# N: tamanho do tabuleiro (NxN)
-# tam_pop: tamanho da população
+# N: tamanho do tabuleiro (NxN) | tam_pop: tamanho da população
 def gera_populacao_inicial(N, tam_pop):
 
     populacao = []
@@ -167,9 +166,11 @@ def gera_populacao_inicial(N, tam_pop):
 
     return populacao
 
-def algoritmo_genetico(N, tam_pop, num_geracoes):
-    # Função fitness
-    fitness = gera_tuplas_custos
+def algoritmo_genetico(N): # N: tamanho do tabuleiro (NxN)
+    # Parâmetros: uma população de 20 indivíduos com 50 gerações
+    tam_pop = 20
+    num_geracoes = 50
+
     # Gera população inicial
     Populacao = gera_populacao_inicial(N, tam_pop)
     # Executa N gerações
@@ -179,12 +180,10 @@ def algoritmo_genetico(N, tam_pop, num_geracoes):
             # Seleciona dois candidatos
             p1 = selecao(Populacao)
             p2 = selecao(Populacao)
-            #     Crossover
-            #     Mutation
-            #     Compute fitness
-            # ...
-            # coloque seu código aqui
-            #
+            crossover2(p1,p2)
+            p2 = mutacao(p1)
+            # Função fitness
+            gera_tuplas_custos(Populacao)
     # ...
     # coloque seu código aqui
     pass

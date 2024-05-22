@@ -1,5 +1,43 @@
+# Manipulação de dados
 import numpy as np
+import pandas as pd
+# Geração de números aleatórios
 import random
+from math import sqrt
+# Geração de gráficos
+from matplotlib import pyplot as plt
+import seaborn as sns
+from plotly import express as px
+from plotly import graph_objects as go
+from IPython.display import clear_output
+
+# FUNÇÕES AUXILIARES PARA SA
+
+def calculate_distance(city_a, city_b):
+    return np.linalg.norm(city_a - city_b)
+
+def total_distance(route, distance_matrix):
+    total = 0
+    for i in range(len(route) - 1):
+        city_a = route[i]
+        city_b = route[i + 1]
+        total += distance_matrix[city_a, city_b]
+    return total
+
+def generate_neighbor(route):
+    new_route = route.copy()
+    index_a = random.randint(0, len(route) - 1)
+    index_b = random.randint(0, len(route) - 1)
+    new_route[index_a], new_route[index_b] = new_route[index_b], new_route[index_a]
+    return new_route
+
+def acceptance_probability(current_distance, new_distance, temperature):
+    if new_distance < current_distance: # melhor == menor (<)
+        return 1.0
+    else:
+        return math.exp((current_distance - new_distance) / temperature)
+    
+# SIMULATED ANNEALING
 
 def simulated_annealing(cities, initial_temperature, cooling_rate, iterations, nrep=50):
 

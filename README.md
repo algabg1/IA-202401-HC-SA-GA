@@ -1,1 +1,1 @@
-# IA-202401-HC-SA-GA
+# Comparação dos Algoritmos HC, SA e GA para o problema das 8 rainhas

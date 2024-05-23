@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 # Geração de números aleatórios
 import random
+import math
 from math import sqrt
 # Geração de gráficos
 from matplotlib import pyplot as plt

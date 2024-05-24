@@ -31,7 +31,7 @@ def SimulatedAnnealing():
 '''
 
 # nrep: número de vizinhos gerados em cada iteração
-def simulated_annealing(tabuleiro, decaimento, iteracoes, nrep=50):
+def simulated_annealing(tabuleiro, decaimento_min, decaimento_max, iteracoes, nrep=50):
 
     tabuleiro_atual = tabuleiro.copy()
     melhor_tabuleiro = tabuleiro_atual.copy()
@@ -60,7 +60,9 @@ def simulated_annealing(tabuleiro, decaimento, iteracoes, nrep=50):
                 tabuleiro_atual = novo_tabuleiro
                 conflito_atual = novo_conflito
 
-        temperatura *= decaimento
+
+        decaimento = random.uniform(decaimento_min, decaimento_max)
+        temperatura *= (1 - decaimento)
 
         #-----------------------------------------------
         if novo_conflito < lista_melhor_conflitos:
@@ -74,20 +76,17 @@ def simulated_annealing(tabuleiro, decaimento, iteracoes, nrep=50):
         lista_temperatura  += [temperatura]
 
         if iteracao % 50 == 0:
-            print(f"Iteration {iteracao}, Best Conflicts: {lista_melhor_conflitos}")
+            print(f"Iteração {iteracao}, melhor Conlfito: {lista_melhor_conflitos}")
 
         #-----------------------------------------------
 
-    return melhor_tabuleiro, lista_melhor_conflitos
+    return lista_melhor_conflitos, melhor_tabuleiro
 
-'''
-initial_board = [random.randint(0, 7) for _ in range(8)]
-initial_temperature = 1000
-cooling_rate = 0.95
-iterations = 1000
+def main():
+    vetor = [4,8,2,7,3,7,5,4]
+    custo, vetor_melhor = (simulated_annealing(vetor,0.1,1,30))
+    print("Melhor solução:", vetor_melhor, "com custo:", custo)
+    print("TABULEIRO\n", aux.converte_tabuleiro(vetor_melhor)) # melhorar converte_tabuleiro pra ficar mais visual
 
-best_board, best_conflicts = simulated_annealing(initial_board, initial_temperature, cooling_rate, iterations)
-
-print("Best board:", best_board)
-print("Best conflicts:", best_conflicts)
-'''
+if __name__ == '__main__':
+    main()

@@ -13,8 +13,6 @@ from IPython.display import clear_output
 
 import auxiliar as aux
 
-# FUNÇÕES AUXILIARES PARA HC
-
 # Cria uma solucao inicial com as cidades em um ordem aleatoria
 def solucao_aleatoria():
     return random.sample(range(8), 8)

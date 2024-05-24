@@ -2,9 +2,9 @@
 
 ## Overview dos algoritmos
 
-Hill-Climbing with Restart: algoritmo de busca local que tenta encontrar a solução ótima para um problema, ajustando iterativamente uma solução próxima à solução atual, movendo-se na direção que leva a uma melhoria no valor da função objetivo.
+Hill-Climbing with Restart: algoritmo de busca local que tenta encontrar a solução ótima para um problema, ajustando iterativamente uma solução próxima à solução atual, movendo-se na direção que leva a uma melhoria no valor da função objetivo. É mais simples e direto, sem ajustes complexos e com uma resposta mais rápida. Pode ser suficiente em espaço de soluções pequeno. 
 
-Simulated Annealing: técnica de otimização probabilística usada para encontrar a solução aproximadamente ótima de um problema, permitindo a aceitação ocasional de soluções piores do que a atual, com uma probabilidade que diminui ao longo do tempo. Isso ajuda a evitar ficar preso em mínimos locais e a explorar o espaço de busca de forma mais eficaz.
+Simulated Annealing: técnica de otimização probabilística usada para encontrar a solução aproximadamente ótima de um problema, permitindo a aceitação ocasional de soluções piores do que a atual, com uma probabilidade que diminui ao longo do tempo. Isso ajuda a evitar ficar preso em mínimos locais (como pode acontecer no Hill-Climbing) e a explorar o espaço de busca de forma mais eficaz.
 
 Genetic Algorithm: essa técnica de otimização funciona gerando uma população inicial de soluções candidatas, avaliando sua adequação por meio de uma função objetivo e, em seguida, aplicando operadores genéticos repetidamente, para evoluir as soluções ao longo de várias gerações, até que uma solução satisfatória seja encontrada ou um critério de parada seja atingido.
 

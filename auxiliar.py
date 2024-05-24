@@ -85,10 +85,8 @@ def __conta_ataques_diagonais(VT):
     return ataques
 
 # Função que recebe um Vetor-Tabuleiro e retorna o número de pares de rainhas se atacando mutuamente nas linhas e diagonais.
-def conta_ataques(VT):
-
+def conta_ataques(VT): # função-objetivo o número de pares de rainhas se atacando
     ataques  = __conta_ataques_linhas(VT)
-
     ataques += __conta_ataques_diagonais(VT)
 
     return ataques

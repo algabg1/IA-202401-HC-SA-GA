@@ -1,106 +1,93 @@
 # Manipulação de dados
 import numpy as np
-import pandas as pd
 # Geração de números aleatórios
 import random
 import math
-from math import sqrt
 # Geração de gráficos
 from matplotlib import pyplot as plt
-import seaborn as sns
-from plotly import express as px
-from plotly import graph_objects as go
 from IPython.display import clear_output
 
-# FUNÇÕES AUXILIARES PARA SA
+import auxiliar as aux
 
-def calculate_distance(city_a, city_b):
-    return np.linalg.norm(city_a - city_b)
-
-def total_distance(route, distance_matrix):
-    total = 0
-    for i in range(len(route) - 1):
-        city_a = route[i]
-        city_b = route[i + 1]
-        total += distance_matrix[city_a, city_b]
-    return total
-
-def generate_neighbor(route):
-    new_route = route.copy()
-    index_a = random.randint(0, len(route) - 1)
-    index_b = random.randint(0, len(route) - 1)
-    new_route[index_a], new_route[index_b] = new_route[index_b], new_route[index_a]
-    return new_route
-
-def acceptance_probability(current_distance, new_distance, temperature):
-    if new_distance < current_distance: # melhor == menor (<)
+def acceptance_probability(conflito_atual, novo_conflito, temperatura):
+    if novo_conflito < conflito_atual: # melhor == menor (<)
         return 1.0
     else:
-        return math.exp((current_distance - new_distance) / temperature)
+        return math.exp((conflito_atual - novo_conflito) / temperatura)
     
 # SIMULATED ANNEALING
+'''
+def SimulatedAnnealing():
+    s0 = solucaoInicial()
+    T = 100
+    while T > eps:
+        s = estadoVizinhoAleatorio(s0)
+        if f(s) > f(s0):
+            s0 = s
+        else:
+            if random() <= exp((f(s)-f(s0))/T):
+                s0 = s
+        T = reduz(T)
+'''
 
-def simulated_annealing(cities, initial_temperature, cooling_rate, iterations, nrep=50):
-    # Parêmtros: temperatura: 1000
-    num_cities = len(cities)
-    distance_matrix = np.zeros((num_cities, num_cities))
+# nrep: número de vizinhos gerados em cada iteração
+def simulated_annealing(tabuleiro, decaimento, iteracoes, nrep=50):
 
-    for i in range(num_cities):
-        for j in range(num_cities):
-            distance_matrix[i, j] = calculate_distance(cities[i], cities[j])
-
-    current_route = np.arange(num_cities)
-    best_route = current_route.copy()
-
-    current_distance = total_distance(current_route, distance_matrix)
-    best_distance = current_distance
-
-    temperature = initial_temperature
-
-    #-----------------------------------------------
-    iteration_list = []
-    best_distances = []
-    distance_list  = []
-    accept_p_list  = []
-    temperat_list  = []
-    #-----------------------------------------------
-
-    for iteration in range(iterations):
-
-        # numero de vizinhos a serem gerados e testados para cada iteração
+    tabuleiro_atual = tabuleiro.copy()
+    melhor_tabuleiro = tabuleiro_atual.copy()
+    
+    conflito_atual = aux.conta_ataques(tabuleiro_atual)
+    melhor_conflito = conflito_atual
+    # Parâmetro: temperatura = 1000
+    temperatura = 1000
+    
+    #-----------------------------------------------------
+    lista_iteracoes = []
+    lista_melhor_conflitos = []
+    lista_conflitos = []
+    lista_aceitacao_prob = []
+    lista_temperatura = []
+    #-----------------------------------------------------
+    
+    for iteracao in range(iteracoes):
         for _ in range(nrep):
+            novo_tabuleiro = aux.gera_vizinhos(tabuleiro_atual)
+            novo_conflito = aux.conta_ataques(novo_tabuleiro)
 
-            new_route = generate_neighbor(current_route)
-            new_distance = total_distance(new_route, distance_matrix)
+            aceitacao_prob = acceptance_probability(conflito_atual, novo_conflito, temperatura)
 
-            acceptance_prob = acceptance_probability(current_distance, new_distance, temperature)
+            if random.random() < aceitacao_prob:
+                tabuleiro_atual = novo_tabuleiro
+                conflito_atual = novo_conflito
 
-            #print(acceptance_prob)
-
-            if random.random() < acceptance_prob:
-                current_route = new_route
-                current_distance = new_distance
-
-        temperature *= cooling_rate
-
+        temperatura *= decaimento
 
         #-----------------------------------------------
-        if new_distance < best_distance:
-            best_route = new_route
-            best_distance = new_distance
+        if novo_conflito < lista_melhor_conflitos:
+            melhor_tabuleiro = novo_tabuleiro
+            lista_melhor_conflitos = novo_conflito
 
-        iteration_list += [iteration]
-        best_distances += [best_distance]
-        distance_list  += [current_distance]
-        accept_p_list  += [acceptance_prob]
-        temperat_list  += [temperature]
+        lista_iteracoes += [iteracao]
+        lista_melhor_conflitos += [lista_melhor_conflitos]
+        lista_conflitos  += [conflito_atual]
+        lista_aceitacao_prob  += [aceitacao_prob]
+        lista_temperatura  += [temperatura]
 
-        if iteration % 50 == 0:
-            plot_axes_figure(cities, current_route, iteration_list,
-                            distance_list, best_distances,
-                            accept_p_list, temperat_list)
+        if iteracao % 50 == 0:
+            print(f"Iteration {iteracao}, Best Conflicts: {lista_melhor_conflitos}")
+
         #-----------------------------------------------
 
-    # plt.show()
+    return melhor_tabuleiro, lista_melhor_conflitos
 
-    return best_route, best_distance
+'''
+initial_board = [random.randint(0, 7) for _ in range(8)]
+initial_temperature = 1000
+cooling_rate = 0.95
+iterations = 1000
+
+best_board, best_conflicts = simulated_annealing(initial_board, initial_temperature, cooling_rate, iterations)
+
+print("Best board:", best_board)
+print("Best conflicts:", best_conflicts)
+'''

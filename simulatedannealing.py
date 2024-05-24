@@ -41,7 +41,7 @@ def acceptance_probability(current_distance, new_distance, temperature):
 # SIMULATED ANNEALING
 
 def simulated_annealing(cities, initial_temperature, cooling_rate, iterations, nrep=50):
-
+    # Parêmtros: temperatura: 1000
     num_cities = len(cities)
     distance_matrix = np.zeros((num_cities, num_cities))
 

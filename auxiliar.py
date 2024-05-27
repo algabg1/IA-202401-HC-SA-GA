@@ -26,6 +26,19 @@ def gera_vizinhos(VT):
 
                 yield vizinho
 
+# Seleciona melhor vizinho
+def obtem_melhor_vizinho(tabuleiro, solucao_inicial):
+    melhor_custo = conta_ataques(solucao_inicial) #solucao aleatoria que foi criada
+    melhor_vizinho = solucao_inicial
+
+    for vizinho in gera_vizinhos(solucao_inicial):
+        custo_atual = conta_ataques(vizinho)
+        if custo_atual < melhor_custo:
+            melhor_custo = custo_atual
+            melhor_vizinho = vizinho
+
+    return melhor_vizinho, melhor_custo
+
 # Recebe um vetor representando um tabuleiro com N rainhas, uma por coluna e retorna uma lista de lista de 0 e 1 representando um tabuleiro com as rainhas.
 def converte_tabuleiro(VT):
 

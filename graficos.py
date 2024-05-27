@@ -1,6 +1,22 @@
 # Geração de gráficos
 from matplotlib import pyplot as plt
+import numpy as np
 from IPython.display import clear_output
+
+# Plota tabuleiro
+def plota_tabuleiro(vetor):
+    tabuleiro = np.zeros((8, 8))
+    rainhas = vetor  # Cada valor representa a linha (1 a 8)
+
+    for coluna, linha in enumerate(rainhas):
+        tabuleiro[linha-1, coluna] = 1
+
+    plt.imshow(tabuleiro, cmap='gray')
+    plt.title('Posições das Rainhas')
+    plt.xticks(range(8), range(1, 9))
+    plt.yticks(range(8), range(1, 9))
+    plt.grid(color='black', linestyle='-', linewidth=1)
+    plt.show()
 
 def plot_path(cities_xy, cities_path, ax):
 
@@ -94,5 +110,4 @@ def plot_axes_figure(cities_xy, cities_path, iteration_list,
 
     plt.pause(0.001)
 
-#-----------------------------------------------------
-#-----------------------------------------------------
+#-----------------------------------------------------    

@@ -26,23 +26,6 @@ def obtem_melhor_vizinho(tabuleiro, solucao_inicial):
 
     return melhor_vizinho, melhor_custo
 
-# Recebe um vetor representando um tabuleiro com N rainhas, uma por coluna e retorna uma lista de lista de 0 e 1 representando um tabuleiro com as rainhas.
-def converte_tabuleiro(VT):
-
-    N = len(VT)
-
-    L = [0]*N
-    T = []
-    for i in range(N):
-        T += [L.copy()]
-
-    for lin in range(N):
-        for col in range(N):
-            if lin+1 == VT[col]:
-                T[lin][col] = 1
-
-    return T
-
 # Função que recebe um Vetor-Tabuleiro e retorna o número de pares de rainhas se atacando mutuamente nas linhas.
 def __conta_ataques_linhas(VT):
 

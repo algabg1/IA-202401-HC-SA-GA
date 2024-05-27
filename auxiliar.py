@@ -1,16 +1,3 @@
-# Manipulação de dados
-import numpy as np
-import pandas as pd
-# Geração de números aleatórios
-import random
-from math import sqrt
-# Geração de gráficos
-from matplotlib import pyplot as plt
-import seaborn as sns
-from plotly import express as px
-from plotly import graph_objects as go
-from IPython.display import clear_output
-
 # Gera todos os vizinhos possíveis, variando uma rainha de cada vez.
 def gera_vizinhos(VT):
 

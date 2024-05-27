@@ -1,11 +1,6 @@
-# Manipulação de dados
-import numpy as np
 # Geração de números aleatórios
 import random
 import math
-# Geração de gráficos
-from matplotlib import pyplot as plt
-from IPython.display import clear_output
 # Funções auxiliares genéricas aos problemas
 import auxiliar as aux
 

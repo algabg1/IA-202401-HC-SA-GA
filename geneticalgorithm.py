@@ -1,24 +1,16 @@
 # Manipulação de dados
 import numpy as np
-import pandas as pd
 # Geração de números aleatórios
 import random
-from math import sqrt
-# Geração de gráficos
-from matplotlib import pyplot as plt
-import seaborn as sns
-from plotly import express as px
-from plotly import graph_objects as go
-from IPython.display import clear_output
-
-
+# Funções auxiliares genéricas aos problemas
+import auxiliar as aux
 
 # Gera tuplas com os custos de todos os individuos da populacao | Função fitness
 def gera_tuplas_custos(Populacao):
 
     TuplasCustos = []
     for individuo in Populacao:
-        ataques = conta_ataques(individuo)
+        ataques = aux.conta_ataques(individuo)
 
         TuplasCustos += [(ataques, individuo)]
 
@@ -60,8 +52,8 @@ def selecao(Populacao):
     Candidato1 = random.choice(Populacao)
     Candidato2 = random.choice(Populacao)
 
-    a1 = conta_ataques(Candidato1)
-    a2 = conta_ataques(Candidato2)
+    a1 = aux.conta_ataques(Candidato1)
+    a2 = aux.conta_ataques(Candidato2)
 
     # eleito o candidato com menor custo
     eleito = Candidato1 if a1<=a2 else Candidato2
@@ -109,9 +101,9 @@ def algoritmo_genetico(N): # N: tamanho do tabuleiro (NxN)
     pass
 
 VT = np.array([4,8,2,7,3,7,5,4])
-converte_tabuleiro(VT)
-conta_ataques(VT)
-Populacao = gera_vizinhos(VT) # <=== TROCAR P GERAR SOLUÇÕES ALEATORIAS; CHAMAR N VEZES P GERAR A POPULAÇÃO
+aux.converte_tabuleiro(VT)
+aux.conta_ataques(VT)
+Populacao = aux.gera_vizinhos(VT) # <=== TROCAR P GERAR SOLUÇÕES ALEATORIAS; CHAMAR N VEZES P GERAR A POPULAÇÃO
 Tuplas = gera_tuplas_custos(Populacao)
 Tuplas
 sorted(Tuplas, key=lambda k: k[0])

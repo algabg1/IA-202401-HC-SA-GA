@@ -1,5 +1,5 @@
 import time
-import hillclimbing, simulatedannealing, geneticalgorithm, graficos
+import hillclimbing, simulatedannealing, geneticalgorithm, plotagem
 
 
 vetor = [4,8,2,7,3,7,5,4]

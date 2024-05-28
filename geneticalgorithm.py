@@ -60,19 +60,12 @@ def selecao(Populacao):
 
     return eleito
 
-# individuo é um Vetor (N) em que cada posicação representa uma coluna indicando as respectivas linhas ocupadas pelas rainhas em um tabuleiro (NxN).
-def gera_individuo(n_cols):
-    # VT = [low, high) x n_cols
-
-    VT = np.random.randint(low=1, high=n_cols+1, size=n_cols)
-    return VT
-
 # N: tamanho do tabuleiro (NxN) | tam_pop: tamanho da população
 def gera_populacao_inicial(N, tam_pop):
 
     populacao = []
     for _ in range(tam_pop):
-        individuo = gera_individuo(N)
+        individuo = aux.gera_vizinhos(N)
 
         populacao.append(individuo)
 

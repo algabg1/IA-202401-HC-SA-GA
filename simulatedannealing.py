@@ -3,6 +3,7 @@ import random
 import math
 # Funções auxiliares genéricas aos problemas
 import auxiliar as aux
+import plotagem as graf
 
 def probabilidade_aceitacao(conflito_atual, novo_conflito, temperatura):
     if novo_conflito < conflito_atual: # melhor == menor (<)
@@ -57,7 +58,7 @@ def simulated_annealing(tabuleiro, decaimento_min, decaimento_max, iteracoes, nr
 
         if iteracao % 50 == 0:
             print(f"Iteração {iteracao}, melhor conflito: {melhor_conflito}")
-
+            graf.plot_axes_figure(lista_iteracoes, lista_aceitacao_prob, lista_temperatura)
         #-----------------------------------------------
 
     return melhor_conflito, melhor_tabuleiro

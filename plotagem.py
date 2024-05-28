@@ -18,40 +18,6 @@ def plota_tabuleiro(vetor):
     plt.grid(color='black', linestyle='-', linewidth=1)
     plt.show()
 
-def plot_path(cities_xy, cities_path, ax):
-
-    # Reeordena as cidades pela ordem do caminho
-    cities = cities_xy[cities_path]
-
-    # Repete a primeira cidade para fechar o ciclo
-    x = cities[:,0]
-    y = cities[:,1]
-
-    # Personalização do gráfico
-    ax.set_xlabel('X (Longitude)')
-    ax.set_ylabel('Y (Latitude)')
-    ax.set_title('Caminho')
-
-    # Plotagem das coordenadas interligadas com pontos vermelhos e linhas azuis
-    ax.plot(x, y, color='blue', linestyle='-', linewidth=2)
-    ax.plot(x, y, color='red', marker='o', markersize=8, linestyle='')
-    ax.plot(x[[-1,0]], y[[-1,0]], color='orange', linestyle='-', linewidth=2)
-
-def plot_distances(iteration_list, distance_list, best_distances, ax):
-
-    x  = iteration_list
-    y1 = distance_list
-    y2 = best_distances
-
-    # Personalização do gráfico
-    ax.set_xlabel('Iterações')
-    ax.set_ylabel('Distâncias (custos)')
-    ax.set_title('Comprimento Total do caminho')
-
-    ax.plot(x,y1, label='Atual')
-    ax.plot(x,y2, label='Melhor')
-    ax.legend()
-
 def plot_acceptance_prob(iteration_list, accept_p_list, ax):
 
     x = iteration_list
@@ -86,22 +52,16 @@ def plot_temperature(iteration_list, temperat_list, ax):
 
 #----------------------------------------------------------------
 
-def plot_axes_figure(cities_xy, cities_path, iteration_list,
-                     distance_list, best_distances,
-                     accept_p_list, temperat_list):
+def plot_axes_figure(iteration_list, accept_p_list, temperat_list):
 
     x = iteration_list
-    y1 = distance_list
-    y2 = best_distances
     y3 = accept_p_list
     y4 = temperat_list
 
     clear_output(wait=True)
 
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(12,8))
+    fig, ((ax3, ax4)) = plt.subplots(2, 2, figsize=(12,8))
 
-    plot_path(cities_xy, cities_path, ax1)
-    plot_distances      (x, y1, y2, ax2)
     plot_acceptance_prob(x, y3, ax3)
     plot_temperature    (x, y4, ax4)
 

@@ -1,3 +1,6 @@
+# Geração de números aleatórios
+import random
+
 # Gera todos os vizinhos possíveis, variando uma rainha de cada vez.
 def gera_vizinhos(VT):
 
@@ -73,3 +76,18 @@ def conta_ataques(VT): # função-objetivo o número de pares de rainhas se atac
     ataques += __conta_ataques_diagonais(VT)
 
     return ataques
+
+# Gera tuplas com os custos de todos os individuos da populacao | Função fitness
+def gera_tuplas_custos(Populacao):
+
+    TuplasCustos = []
+    for individuo in Populacao:
+        ataques = conta_ataques(individuo)
+
+        TuplasCustos += [(ataques, individuo)]
+
+    return TuplasCustos
+
+# Cria uma solucao inicial com as rainhas em um ordem aleatoria
+def solucao_aleatoria():
+    return random.sample(range(8), 8)

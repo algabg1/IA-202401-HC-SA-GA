@@ -1,11 +1,5 @@
-# Geração de números aleatórios
-import random
 # Funções auxiliares genéricas aos problemas
 import auxiliar as aux
-
-# Cria uma solucao inicial com as cidades em um ordem aleatoria
-def solucao_aleatoria():
-    return random.sample(range(8), 8)
 
 # HILL-CLIMBING COM RESTART
 def hill_climbing_restart(tabuleiro):
@@ -14,7 +8,7 @@ def hill_climbing_restart(tabuleiro):
     for _ in range(20):
         print("Iteração", _+1)
         # solucao inicial
-        solucao_inicial = solucao_aleatoria()
+        solucao_inicial = aux.solucao_aleatoria()
         print("Solução gerada aleatoriamente:", solucao_inicial)
         # melhor solucao ate o momento
         solucao_melhor, custo_melhor = aux.obtem_melhor_vizinho(tabuleiro, solucao_inicial)

@@ -5,17 +5,6 @@ import random
 # Funções auxiliares genéricas aos problemas
 import auxiliar as aux
 
-# Gera tuplas com os custos de todos os individuos da populacao | Função fitness
-def gera_tuplas_custos(Populacao):
-
-    TuplasCustos = []
-    for individuo in Populacao:
-        ataques = aux.conta_ataques(individuo)
-
-        TuplasCustos += [(ataques, individuo)]
-
-    return TuplasCustos
-
 def mutacao(VT, p_mutacao=0.20):
 
     VT_mutated = VT.copy()
@@ -60,35 +49,35 @@ def selecao(Populacao):
 
     return eleito
 
-# N: tamanho do tabuleiro (NxN) | tam_pop: tamanho da população
-def gera_populacao_inicial(N, tam_pop):
+# tam_pop: tamanho da população
+def gera_populacao_inicial(tam_pop):
 
     populacao = []
     for _ in range(tam_pop):
-        individuo = aux.gera_vizinhos(N)
+        individuo = aux.solucao_aleatoria()
 
         populacao.append(individuo)
 
     return populacao
 
-def algoritmo_genetico(N): # N: tamanho do tabuleiro (NxN)
+def algoritmo_genetico():
     # Parâmetros: uma população de 20 indivíduos com 50 gerações
     tam_pop = 20
     num_geracoes = 50
 
     # Gera população inicial
-    Populacao = gera_populacao_inicial(N, tam_pop)
+    Populacao = gera_populacao_inicial(tam_pop)
     # Executa N gerações
     for geracao in range(num_geracoes):
         for i in range(tam_pop / 2):
 
             # Seleciona dois candidatos
-            p1 = selecao(Populacao)
-            p2 = selecao(Populacao)
-            crossover2(p1,p2)
-            p2 = mutacao(p1)
+            pai1 = selecao(Populacao)
+            pai2 = selecao(Populacao)
+            filho1, filho2 = crossover2(pai1,pai2)
+            pai2 = mutacao(pai1)
             # Função fitness
-            gera_tuplas_custos(Populacao)
+            tuplaCusto = aux.gera_tuplas_custos(Populacao)
     # ...
     # coloque seu código aqui
     pass
@@ -97,7 +86,7 @@ VT = np.array([4,8,2,7,3,7,5,4])
 aux.converte_tabuleiro(VT)
 aux.conta_ataques(VT)
 Populacao = aux.gera_vizinhos(VT) # <=== TROCAR P GERAR SOLUÇÕES ALEATORIAS; CHAMAR N VEZES P GERAR A POPULAÇÃO
-Tuplas = gera_tuplas_custos(Populacao)
+Tuplas = aux.gera_tuplas_custos(Populacao)
 Tuplas
 sorted(Tuplas, key=lambda k: k[0])
 VT2 = mutacao(VT)
@@ -107,4 +96,4 @@ N = 8
 tam_pop = 20
 Populacao = gera_populacao_inicial(N, tam_pop)
 Populacao
-gera_tuplas_custos(Populacao)
+aux.gera_tuplas_custos(Populacao)

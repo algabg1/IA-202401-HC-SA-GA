@@ -85,6 +85,8 @@ def gera_tuplas_custos(Populacao):
         ataques = conta_ataques(individuo)
 
         TuplasCustos += [(ataques, individuo)]
+    
+    TuplasCustos = sorted(TuplasCustos, key=lambda tupla: tupla[0])
 
     return TuplasCustos
 

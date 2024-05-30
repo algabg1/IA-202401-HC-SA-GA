@@ -67,33 +67,53 @@ def algoritmo_genetico():
 
     # Gera população inicial
     Populacao = gera_populacao_inicial(tam_pop)
+    
+    tuplaCusto = aux.gera_tuplas_custos(Populacao)
+    #print(tuplaCusto, "\n")
+    #print(len(tuplaCusto), "\n")
+    
     # Executa N gerações
     for geracao in range(num_geracoes):
-        for i in range(tam_pop / 2):
+        for i in range(int(tam_pop / 2)):
 
             # Seleciona dois candidatos
             pai1 = selecao(Populacao)
             pai2 = selecao(Populacao)
+            
             filho1, filho2 = crossover2(pai1,pai2)
-            pai2 = mutacao(pai1)
+            
+            filho1 = mutacao(filho1)
+            filho2 = mutacao(filho2)
+            
+            Populacao.append(filho1)
+            Populacao.append(filho2)
+    
             # Função fitness
             tuplaCusto = aux.gera_tuplas_custos(Populacao)
-    # ...
-    # coloque seu código aqui
-    pass
+        
+        i = 0
+        
+    #print(tuplaCusto, "\n")
+    #print(len(tuplaCusto), "\n")
 
-VT = np.array([4,8,2,7,3,7,5,4])
-aux.converte_tabuleiro(VT)
-aux.conta_ataques(VT)
-Populacao = aux.gera_vizinhos(VT) # <=== TROCAR P GERAR SOLUÇÕES ALEATORIAS; CHAMAR N VEZES P GERAR A POPULAÇÃO
-Tuplas = aux.gera_tuplas_custos(Populacao)
-Tuplas
-sorted(Tuplas, key=lambda k: k[0])
-VT2 = mutacao(VT)
-crossover2(VT,VT2)
-selecao([VT,VT2])
-N = 8
-tam_pop = 20
-Populacao = gera_populacao_inicial(N, tam_pop)
-Populacao
-aux.gera_tuplas_custos(Populacao)
+def main():
+    algoritmo_genetico()
+
+if __name__ == "__main__":
+    main()
+
+#VT = np.array([4,8,2,7,3,7,5,4])
+#aux.converte_tabuleiro(VT)
+#aux.conta_ataques(VT)
+#Populacao = aux.gera_vizinhos(VT) # <=== TROCAR P GERAR SOLUÇÕES ALEATORIAS; CHAMAR N VEZES P GERAR A POPULAÇÃO
+#Tuplas = aux.gera_tuplas_custos(Populacao)
+#Tuplas
+#sorted(Tuplas, key=lambda k: k[0])
+#VT2 = mutacao(VT)
+#crossover2(VT,VT2)
+#selecao([VT,VT2])
+#N = 8
+#tam_pop = 20
+#Populacao = gera_populacao_inicial(N, tam_pop)
+#Populacao
+#aux.gera_tuplas_custos(Populacao)

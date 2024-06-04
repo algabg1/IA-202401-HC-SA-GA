@@ -14,8 +14,11 @@ def probabilidade_aceitacao(conflito_atual, novo_conflito, temperatura):
 # SIMULATED ANNEALING
 
 # nrep: número de vizinhos gerados em cada iteração
-def simulated_annealing(tabuleiro, decaimento_min, decaimento_max, iteracoes, nrep=50):
-
+def simulated_annealing(tabuleiro, nrep=50):
+    decaimento_min = 0.1
+    decaimento_max = 1
+    iteracoes = 30
+    
     tabuleiro_atual = tabuleiro.copy()
     melhor_tabuleiro = tabuleiro_atual.copy()
     

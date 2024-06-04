@@ -3,21 +3,6 @@ from matplotlib import pyplot as plt
 import numpy as np
 from IPython.display import clear_output
 
-# Plota tabuleiro
-def plota_tabuleiro(vetor):
-    tabuleiro = np.zeros((8, 8))
-    rainhas = vetor  # Cada valor representa a linha (1 a 8)
-
-    for coluna, linha in enumerate(rainhas):
-        tabuleiro[linha-1, coluna] = 1
-
-    plt.imshow(tabuleiro, cmap='gray')
-    plt.title('Posições das Rainhas')
-    plt.xticks(range(8), range(1, 9))
-    plt.yticks(range(8), range(1, 9))
-    plt.grid(color='black', linestyle='-', linewidth=1)
-    plt.show()
-
 def plot_acceptance_prob(iteration_list, accept_p_list, ax):
 
     x = iteration_list
@@ -71,3 +56,30 @@ def plot_axes_figure(iteration_list, accept_p_list, temperat_list):
     plt.pause(0.001)
 
 #-----------------------------------------------------    
+def plota_tabuleiro(positions, save_path=None):
+    fig, ax = plt.subplots()
+    
+    ax.set_xlim(0, 8)
+    ax.set_ylim(0, 8)
+    ax.set_xticks(range(9))
+    ax.set_yticks(range(9))
+    ax.grid(True)
+    
+    for i in range(8):
+        for j in range(8):
+            if (i + j) % 2 == 0:
+                ax.add_patch(plt.Rectangle((i, j), 1, 1, fill=True, color='lightgrey'))
+            else:
+                ax.add_patch(plt.Rectangle((i, j), 1, 1, fill=True, color='white'))
+    
+    for col, row in enumerate(positions):
+        ax.text(col + 0.5, row - 0.5, '♛', fontsize=30, ha='center', va='center', color='black')
+    
+    plt.gca().invert_yaxis()
+    plt.gca().xaxis.tick_top()
+
+    if save_path:
+        plt.savefig(save_path, bbox_inches='tight')
+        plt.close(fig)
+    else:
+        plt.show()

@@ -56,7 +56,7 @@ def plot_axes_figure(iteration_list, accept_p_list, temperat_list):
     plt.pause(0.001)
 
 #-----------------------------------------------------    
-def plota_tabuleiro(positions, save_path=None):
+def plota_tabuleiro(positions):
     fig, ax = plt.subplots()
     
     ax.set_xlim(0, 8)
@@ -78,8 +78,4 @@ def plota_tabuleiro(positions, save_path=None):
     plt.gca().invert_yaxis()
     plt.gca().xaxis.tick_top()
 
-    if save_path:
-        plt.savefig(save_path, bbox_inches='tight')
-        plt.close(fig)
-    else:
-        plt.show()
+    plt.show()

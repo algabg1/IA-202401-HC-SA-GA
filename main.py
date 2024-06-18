@@ -280,10 +280,9 @@ def hill_climbing_restart(tabuleiro):
         lista_melhor_conflitos += [custo_melhor]
         lista_conflitos  += [custo_atual]
         
-        if iteracao % 50 == 0:
-            print(f"Iteração {iteracao}, melhor conflito: {custo_melhor}")
-            plot_axes_figure_hc(lista_iteracoes, lista_melhor_conflitos, lista_conflitos)
-            plota_tabuleiro(candidato_atual)
+        print(f"Iteração {iteracao}, melhor conflito: {custo_melhor}")
+        plot_axes_figure_hc(lista_iteracoes, lista_melhor_conflitos, lista_conflitos)
+        plota_tabuleiro(candidato_atual)
     
     return custo_melhor, solucao_melhor
 

@@ -39,13 +39,13 @@ Abaixo é apresentado um gráfico com o intuito de comparar a distribuição dos
     <img src="/img/custo_algoritmos.png">
 </div>
 
-<div align="center">
+
 |          Algoritmo         |  Máximo  |  Mínimo  |  Mediana |  Desvio padrão  |
 | -------------------------- | -------- | -------- | -------- | --------------- |
 | Hill-Climbing com Restart  |   4.000  |  0.000   |   1.566  |      0.773      |
 | Simulated Annealing        |   2.000  |  0.000   |   0.866  |      0.434      |
 | Genetic Algorithm          |   2.000  |  0.000   |   0.966  |      0.668      |
-</div>
+
 
 Observando a distribuição dos valores, o algoritmo HC-R tem uma média de 1.566, indicando que os valores estão acima de 1 em média, mas com uma dispersão significativa, sendo a maior entre os algoritmos. Com a mediana em 2, podemos concluir que pelo menos metade dos valores são 2 ou maior. Abaixo é apresentado um gráfico do custo de uma execução do HC-R e podemos observar uma grande variação nos resultados.
 
